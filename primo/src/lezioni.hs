@@ -21,3 +21,5 @@ map1 f = foldr (\x xs -> f x : xs) []
 
 filter1 :: (a -> Bool) -> [a] -> [a]
 filter1 p = foldr (\x xs -> if p x then x:xs else xs) []
+
+

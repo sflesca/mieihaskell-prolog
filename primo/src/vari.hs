@@ -78,3 +78,19 @@ elemFindMia :: Eq a => a -> [a] -> Bool
 elemFindMia _ [] = False
 elemFindMia x (y:ys)  | x==y = True
                       | otherwise = elemFindMia x ys
+
+tokenize :: (a -> Bool) -> [a] -> [[a]]
+tokenize p [] = []
+tokenize p (x:xs) = go [x] xs
+    where go acc [] = [acc]
+          go acc (y:ys) | p y = acc : go [] ys
+                        | otherwise = go (acc++[y]) ys
+
+
+tokenize2 :: (a -> Bool) -> [a] -> [[a]]
+tokenize2 p xs = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]] xs
+
+tokenize3 :: (a -> Bool) -> [a] -> [[a]]
+tokenize3 p xs = 
+  let rs = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]] xs
+  in case rs of ([]:r) -> r ; _ -> rs
