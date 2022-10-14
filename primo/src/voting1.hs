@@ -33,7 +33,9 @@ winner :: [Vote] -> Vote
 winner vs = let Esito v n = minimum (computepoll vs)
             in v
 
-
+looser :: [Vote] -> Vote
+looser vs = let Esito v n = maximum (computepoll vs)
+            in v
 
 
 rmempty :: Eq a => [[a]] -> [[a]]
@@ -42,9 +44,6 @@ rmempty = filter (/= [])
 elim :: Eq a => a -> [[a]] -> [[a]]
 elim x = map (filter (/= x))
 
-looser :: [Vote] -> Vote
-looser vs = let Esito v n = maximum (computepoll vs)
-            in v
 
 rank :: [[Vote]] -> [Vote]
 rank = map toVote . reverse . sort . computepoll . map head
