@@ -15,3 +15,6 @@ factors n = [x | x <-[1..n], n `mod` x == 0]
 perfects :: Integral a => a -> [a]
 perfects n = [x | x <- [1..n], sum (init (factors x)) == x]
 
+laugh :: IO ()
+laugh = let x = do putChar 'h'; putChar 'a'
+    in do x; x
