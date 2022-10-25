@@ -61,5 +61,6 @@ randomList n = do
     xs <- randomList (n-1)
     return (x:xs)
 
-resultList :: [Float]
-resultList = generate (randomList 17)
+
+resultList :: (Eq t, Num t) => t -> [Float]
+resultList x = generate (randomList x)
