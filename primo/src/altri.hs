@@ -27,7 +27,7 @@ numfigli ps fs = map (\ p -> (p, countParent p fs)) ps
 
 countParent :: Person -> [Figlio] -> Int
 countParent (Person x) [] = 0
-countParent (Person x) ((Figlio y _):fs) 
+countParent (Person x) ((Figlio y _):fs)
                                 | x==y = 1+countParent (Person x) fs
                                 | otherwise = countParent (Person x) fs
 
@@ -36,3 +36,13 @@ esisteMaggiore [] _ = False
 esisteMaggiore (((Person x),i):xs) ((Person y),j)
                                         | x/=y && i>j = True
                                         | otherwise = esisteMaggiore xs ((Person y),j)
+
+-- Node (Node (Leaf 1) (Leaf 2)) (Leaf 3)
+data Tree a = Leaf a | Node (Tree a) (Tree a)
+
+leaves :: Tree a -> [a]
+leaves (Leaf a) = [a]
+leaves (Node t1 t2) = leaves t1++ leaves t2
+
+size :: Tree a -> Int
+size t = length (leaves t)
