@@ -1,6 +1,9 @@
 minOdd :: [Int] -> (Int, Int)
 minOdd [] = (maxBound::Int,maxBound::Int)
-minOdd (x : xs) | mod x 2 == 1 = let (y,z) = minOdd xs in if x<y then (x,y) else if x<z then (y,x) else (y,z)
+minOdd (x : xs) | mod x 2 == 1 = let (y,z) = minOdd xs in 
+                        if x<y then (x,y) 
+                        else if x<z 
+                        then (y,x) else (y,z)
                 | otherwise    = minOdd xs
 
 partialSums :: Num a => [a] -> [a]
