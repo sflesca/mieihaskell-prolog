@@ -1,7 +1,7 @@
 myLast1 :: [a] -> a
 myLast1 [] = error "La lista è vuota"
 myLast1 [x] = x
-myLast1 (_:xs) = myLast xs
+myLast1 (_:xs) = myLast1 xs
 
 myLast2 :: [a] -> a
 myLast2 [] = error "La lista è vuota"
