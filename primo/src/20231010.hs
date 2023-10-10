@@ -1,6 +1,6 @@
 
 pyths :: (Integral c) => c -> [(c, c, c)]
-pyths n = [(x,y, z) | x <- [1..n], y<-[1..n], z<-[1..n], x^2+y^2 == z^2]
+pyths n = [(x,y,z) | x <- [1..n], y<-[1..n], z<-[1..n], x^2+y^2 == z^2]
 
 factors :: Integral a => a -> [a]
 factors n = [x | x <-[1..n], n `mod` x == 0]
