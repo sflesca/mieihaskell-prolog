@@ -1,8 +1,8 @@
 minOdd :: [Int] -> (Int, Int)
 minOdd [] = (maxBound::Int,maxBound::Int)
-minOdd (x : xs) | mod x 2 == 1 = let (y,z) = minOdd xs in 
-                        if x<y then (x,y) 
-                        else if x<z 
+minOdd (x : xs) | mod x 2 == 1 = let (y,z) = minOdd xs in
+                        if x<y then (x,y)
+                        else if x<z
                         then (y,x) else (y,z)
                 | otherwise    = minOdd xs
 
@@ -35,7 +35,15 @@ allequals (x:xs) =  all (==x) xs
 
 bstElem :: (Eq t, Ord t) => t -> BST t -> Bool
 bstElem x Void = False
-bstElem x (Node y sn ds) 
+bstElem x (Node y sn ds)
             | x==y       = True
             | x < y      = bstElem x sn
             | otherwise  = bstElem x ds
+
+bst1 = Node 1
+        Void
+        (Node 2
+                (Node (4)
+                        Void
+                        (Node 6 Void Void) )
+                (Node (10) Void Void))

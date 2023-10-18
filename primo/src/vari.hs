@@ -88,9 +88,14 @@ tokenize p (x:xs) = go [x] xs
 
 
 tokenize2 :: (a -> Bool) -> [a] -> [[a]]
-tokenize2 p xs = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]] xs
+tokenize2 p = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]]
 
 tokenize3 :: (a -> Bool) -> [a] -> [[a]]
-tokenize3 p xs = 
+tokenize3 p xs =
   let rs = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]] xs
-  in case rs of ([]:r) -> r ; _ -> rs
+  in case rs of
+    ([]:r) -> r
+    _ -> rs
+
+tokenize4 :: Eq a => (a -> Bool) -> [a] -> [[a]]
+tokenize4 p xs = filter (/=[]) (tokenize2 p xs)
