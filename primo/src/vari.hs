@@ -81,8 +81,10 @@ elemFindMia x (y:ys)  | x==y = True
 
 tokenize :: (a -> Bool) -> [a] -> [[a]]
 tokenize p [] = []
-tokenize p (x:xs) = go [x] xs
+tokenize p xs = go [] xs
     where go acc [] = [acc]
+          go [] (y:ys) | p y = go [] ys
+                        | otherwise = go [y] ys
           go acc (y:ys) | p y = acc : go [] ys
                         | otherwise = go (acc++[y]) ys
 
@@ -90,12 +92,12 @@ tokenize p (x:xs) = go [x] xs
 tokenize2 :: (a -> Bool) -> [a] -> [[a]]
 tokenize2 p = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]]
 
-tokenize3 :: (a -> Bool) -> [a] -> [[a]]
+tokenize3 :: Eq a => (a -> Bool) -> [a] -> [[a]]
 tokenize3 p xs =
   let rs = foldr (\x ~(a:r) -> if (p x) then ([]:a:r) else ((x:a):r)) [[]] xs
   in case rs of
-    ([]:r) -> r
-    _ -> rs
+    (x:r) -> filter (/=[]) (x:r)
+    [] -> []
 
 tokenize4 :: Eq a => (a -> Bool) -> [a] -> [[a]]
-tokenize4 p xs = filter (/=[]) (tokenize2 p xs)
+tokenize4 p xs = filter (/=[]) (tokenize p xs)

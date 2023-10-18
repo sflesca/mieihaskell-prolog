@@ -10,6 +10,10 @@ partialSums :: Num a => [a] -> [a]
 partialSums (x:xs) = x : map (+ x) (partialSums xs)
 partialSums []     = []
 
+partialSums1 :: Num a => [a] -> [a]
+partialSums1 (x:xs) = x : map (+ x) (xs)
+partialSums1 []     = []
+
 listWithPartialSums :: Num b => [b] -> [(b, b)]
 listWithPartialSums xs = zip xs (partialSums xs)
 

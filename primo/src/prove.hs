@@ -1,3 +1,4 @@
+delete :: Int -> [Int] -> [Int]
 delete _ [] = []
 delete x lista = takeWhile (\y -> y /= x) lista ++ [x] ++ resto x lista
 
