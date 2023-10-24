@@ -23,3 +23,17 @@ filter1 :: (a -> Bool) -> [a] -> [a]
 filter1 p = foldr (\x xs -> if p x then x:xs else xs) []
 
 
+primes :: [Int]
+primes = sieve [2..]
+
+sieve :: [Int] -> [Int]
+sieve (p:xs) =
+    p : sieve [x | x <- xs, mod x p /= 0]
+
+
+twin :: (Int,Int) -> Bool
+twin (x,y) = y == x+2
+
+twins :: [(Int,Int)]
+twins = filter twin (zip primes (tail primes))
+
