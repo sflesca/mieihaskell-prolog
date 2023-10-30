@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 import Data.List
 
 data Vote = Red | Blue | Green
@@ -11,8 +12,9 @@ toVote :: VotiPresi -> Vote
 toVote (Esito v _ ) = v
 
 instance Ord VotiPresi where
+    compare :: VotiPresi -> VotiPresi -> Ordering
     compare (Esito v1 n1) (Esito v2 n2) | n1>n2                 = LT
-                                        | n1 == n2 && v1 < v2   = LT
+                                        | n1 == n2 && v1 > v2   = LT
                                         | otherwise             = GT
 
 
