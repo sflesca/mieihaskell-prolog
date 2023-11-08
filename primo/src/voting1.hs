@@ -23,6 +23,11 @@ count x []  = 0
 count x (y:ys)  | x==y      = 1+ count x ys
                 | otherwise = count x ys
 
+
+countwithfoldr :: (Foldable t, Eq a1, Num a2) => a1 -> t a1 -> a2
+countwithfoldr x = foldr (\y c -> if x==y then c+1 else c) 0
+
+
 removedup :: Eq a => [a] -> [a]
 removedup []        = []
 removedup (x:xs)    = x : filter (/=x) (removedup xs)

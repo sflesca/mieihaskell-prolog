@@ -1,0 +1,23 @@
+Y = f(Z,Z), Z = f(W,W) : {X/f(Y,Y)}
+Z = f(W,W) : {X/f(Y,Y), Y/f(Z,Z)}
+: {X/f(Y,Y), Y/f(Z,Z), Z /f(W,W)}
+
+{X/f(Y,Y), Y/f(Z,Z), Z /f(W,W)}
+corrisponde a
+{X/f(f(f(W,W),f(W,W)),f(f(W,W),f(W,W))), Y/f(f(W,W),f(W,W)), Z /f(W,W)}
+
+X = f(g(Y,Z), W), f(Y,W) = Z : {}
+f(Y,W) = Z : {X / f(g(Y,Z), W)}
+\emptyset  : {X / f(g(Y,Z), W), Z/ f(Y,W) }
+\emptyset  : {X / f(g(Y,f(Y,W)), W), Z/ f(Y,W) }
+
+X = f(g(Y,Z), W), f(X,Z) = W : {}
+f(f(g(Y,Z), W),Z) = W : {X / f(g(Y,Z), W)} -> Non unificabile
+
+X = f(Y), Y = f(Z), f(X,Y) = f(g(Z),W) : {}
+{X / f(Y)}( Y = f(Z), f(X,Y) = f(g(Z),W)) : {X / f(Y)}
+Y = f(Z), f(f(Y),Y) = f(g(Z),W) : {X / f(Y)}
+{Y / f(Z)}(f(f(Y),Y) = f(g(Z),W)) : {X / f(Y), Y / f(Z) }
+f(f(f(Z)),f(Z)) = f(g(Z),W) : {X / f(Y), Y / f(Z) }
+f(f(Z)) = g(Z) ,f(Z) = W : {X / f(Y), Y / f(Z) } non unificabile nome dei termini diversi
+
