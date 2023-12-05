@@ -10,3 +10,5 @@ sommeCoppie lista = sommeCoppieAux 0 (sum lista) lista
 scalare [] [] = 0
 scalare (x:xs) (y:ys) = x*y+ scalare xs ys
 scalare xs ys = error "bho"
+
+pippo = take 3
