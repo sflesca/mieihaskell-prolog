@@ -7,4 +7,6 @@ sommeCoppie lista = sommeCoppieAux 0 (sum lista) lista
           nuovoSuccSum = succSum - x
       in (precSum, nuovoSuccSum) : sommeCoppieAux nuovoPrecSum nuovoSuccSum xs
 
-
+scalare [] [] = 0
+scalare (x:xs) (y:ys) = x*y+ scalare xs ys
+scalare xs ys = error "bho"
