@@ -7,7 +7,6 @@ coppie lista = coppieAux 0 (sum lista) lista
           nuovoSuccSum = succSum - x
       in (precSum, nuovoSuccSum) : coppieAux nuovoPrecSum nuovoSuccSum xs
 
-
 scalare :: [Int] -> [Int] -> Int
 scalare [] [] = 0
 scalare (x:xs) (y:ys) = x*y+ scalare xs ys
