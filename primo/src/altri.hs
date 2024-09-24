@@ -8,6 +8,8 @@ nongenitore (p:ps) fs
                     | not (presente p fs) = (p:(nongenitore ps fs))
                     | otherwise = nongenitore ps fs
 
+-- nongenitore ps fs = fiter (\p -> (not (presente p fs))) ps
+
 presente :: Person -> [Figlio] -> Bool
 presente p [] = False
 presente (Person x) ((Figlio y z):fs)
