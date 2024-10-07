@@ -6,7 +6,7 @@ mcm a b = mcmHelper (max a b)
       | otherwise                        = mcmHelper (x + 1)
 
 mcd :: Int -> Int -> Int
-mcd a 0 = abs a  -- Caso base: se b è 0, il MCD è a
+mcd a 0 = abs a  
 mcd a b = mcd b (a `mod` b)
 
 mcm1 :: Int -> Int -> Int
@@ -19,9 +19,9 @@ numgz (x:xs) = if x>0 then 1+ numgz xs else numgz xs
 
 
 sumltx :: (Num t, Ord t) => t -> [t] -> t
-sumltx x [] = 0
+sumltx _ [] = 0
 sumltx y (x:xs)
-    | x<y       = y + sumltx y xs
+    | x<y       = x + sumltx y xs
     | otherwise = sumltx y xs
 
 prodscal :: Num a => [a] -> [a] -> a
