@@ -6,7 +6,7 @@ mcm a b = mcmHelper (max a b)
       | otherwise                        = mcmHelper (x + 1)
 
 mcd :: Int -> Int -> Int
-mcd a 0 = abs a  
+mcd a 0 = abs a
 mcd a b = mcd b (a `mod` b)
 
 mcm1 :: Int -> Int -> Int
@@ -15,7 +15,7 @@ mcm1 a b = abs (a * b) `div` gcd a b
 
 numgz :: (Ord a1, Num a2, Num a1) => [a1] -> a2
 numgz [] = 0
-numgz (x:xs) = if x>0 then 1+ numgz xs else numgz xs
+numgz (x:xs) = if x>0 then 1 + numgz xs else numgz xs
 
 
 sumltx :: (Num t, Ord t) => t -> [t] -> t
@@ -36,6 +36,13 @@ isSublist [] _ = False
 isSublist xs ys
   | take (length ys) xs == ys = True
   | otherwise = isSublist (tail xs) ys
+
+isSublist2 :: Eq a => [a] -> [a] -> Bool
+isSublist2 _ [] = True
+isSublist2 [] _ = False
+isSublist2 (x:xs) ys
+  | take (length ys) (x:xs) == ys = True
+  | otherwise = isSublist xs ys
 
 
 countSublist :: Eq a => [a] -> [a] -> Int
