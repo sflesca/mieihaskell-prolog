@@ -59,12 +59,19 @@ sublists xs = []:[ take n (drop i xs) | i <- [0..length xs - 1], n <- [1..length
 
 sublistsNonContigue :: [a] -> [[a]]
 sublistsNonContigue [] = [[]]
-sublistsNonContigue (x:xs) = (addinhead x (sublistsNonContigue xs)) ++ sublistsNonContigue xs
+sublistsNonContigue (x:xs) = addinhead x (sublistsNonContigue xs) ++ sublistsNonContigue xs
 
 addinhead :: a -> [[a]] -> [[a]]
 addinhead x [] = []
 addinhead x (ys:yss) = (x:ys):addinhead x yss
 
+addinhead1 :: a -> [[a]] -> [[a]]
+addinhead1 x  = map (x :)
+
 sublistsNonContigue1 :: [a] -> [[a]]
 sublistsNonContigue1 [] = [[]]
 sublistsNonContigue1 (x:xs) = map (x:) (sublistsNonContigue xs) ++ sublistsNonContigue xs
+
+sublists2 :: Eq a => [a] -> [[a]]
+sublists2 xs = filter (isSublist xs)(sublistsNonContigue1 xs)
+
