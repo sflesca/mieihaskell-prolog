@@ -38,7 +38,9 @@ instance Functor RandomGenerator where
 
 instance Applicative RandomGenerator where
   pure  = return
-  (<*>) = ap
+  (<*>) :: RandomGenerator (a -> b) -> RandomGenerator a -> RandomGenerator b
+  (<*>) = ap -- la funzione ap è definita in Control.Monad e fa esattamente questo
+             -- ap mf mx = do { f <- mf; x <- mx; return (f x) }
 
 instreturn :: a -> RandomGenerator a
     ance Monad RandomGenerator where
