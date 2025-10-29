@@ -6,7 +6,7 @@ mcm a b = mcmHelper (max a b)
       | otherwise                        = mcmHelper (x + 1)
 
 mcd :: Int -> Int -> Int
-mcd a 0 = abs a  
+mcd a 0 = abs a
 mcd a b = mcd b (a `mod` b)
 
 mcm1 :: Int -> Int -> Int
@@ -15,7 +15,7 @@ mcm1 a b = abs (a * b) `div` gcd a b
 
 numgz :: (Ord a1, Num a2, Num a1) => [a1] -> a2
 numgz [] = 0
-numgz (x:xs) = if x>0 then 1+ numgz xs else numgz xs
+numgz (x:xs) = if x>0 then 1 + numgz xs else numgz xs
 
 
 sumltx :: (Num t, Ord t) => t -> [t] -> t
@@ -37,6 +37,13 @@ isSublist xs ys
   | take (length ys) xs == ys = True
   | otherwise = isSublist (tail xs) ys
 
+isSublist2 :: Eq a => [a] -> [a] -> Bool
+isSublist2 _ [] = True
+isSublist2 [] _ = False
+isSublist2 (x:xs) ys
+  | take (length ys) (x:xs) == ys = True
+  | otherwise = isSublist xs ys
+
 
 countSublist :: Eq a => [a] -> [a] -> Int
 countSublist [] _ = 0
@@ -52,12 +59,19 @@ sublists xs = []:[ take n (drop i xs) | i <- [0..length xs - 1], n <- [1..length
 
 sublistsNonContigue :: [a] -> [[a]]
 sublistsNonContigue [] = [[]]
-sublistsNonContigue (x:xs) = (addinhead x (sublistsNonContigue xs)) ++ sublistsNonContigue xs
+sublistsNonContigue (x:xs) = addinhead x (sublistsNonContigue xs) ++ sublistsNonContigue xs
 
 addinhead :: a -> [[a]] -> [[a]]
 addinhead x [] = []
 addinhead x (ys:yss) = (x:ys):addinhead x yss
 
+addinhead1 :: a -> [[a]] -> [[a]]
+addinhead1 x  = map (x :)
+
 sublistsNonContigue1 :: [a] -> [[a]]
 sublistsNonContigue1 [] = [[]]
 sublistsNonContigue1 (x:xs) = map (x:) (sublistsNonContigue xs) ++ sublistsNonContigue xs
+
+sublists2 :: Eq a => [a] -> [[a]]
+sublists2 xs = filter (isSublist xs)(sublistsNonContigue1 xs)
+

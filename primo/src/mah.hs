@@ -24,3 +24,10 @@ albero2 :: AlberoBInt
 albero2 = Vuoto 
 albero3 :: AlberoBInt
 albero3 = Nodo 4 (Nodo 5 Vuoto Vuoto) (Nodo 6 (Nodo 5 Vuoto Vuoto) Vuoto)
+
+
+
+
+convertiLista ::  [(Int,Int)] -> [[Int]]
+convertiLista [] = []
+convertiLista xs = foldr (++) [] [ x |  (y,z) < - xs , k <- [1..z] , x <- y*k ]
