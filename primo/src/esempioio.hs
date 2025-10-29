@@ -1,3 +1,5 @@
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 import Data.Char ( toUpper )
 import Data.List ( intersperse )
 import Control.Monad (liftM, ap)
@@ -38,8 +40,10 @@ instance Applicative RandomGenerator where
   pure  = return
   (<*>) = ap
 
-instance Monad RandomGenerator where
+instreturn :: a -> RandomGenerator a
+    ance Monad RandomGenerator where
     return x = Ran (\seed -> (x, seed))
+    (>>=) :: RandomGenerator a -> (a -> RandomGenerator b) -> RandomGenerator b
     (Ran g0) >>= f = Ran (\seed ->
         let (y, seed1) = g0 seed
             (Ran g1) = f y
@@ -55,6 +59,7 @@ randoms3 = do
 result3 :: (Float, Float, Float)
 result3 = generate randoms3
 
+randomList :: (Eq t, Num t) => t -> RandomGenerator [Float]
 randomList 0 = return []
 randomList n = do
     x <- random
