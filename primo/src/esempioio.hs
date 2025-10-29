@@ -2,7 +2,8 @@
 {-# LANGUAGE InstanceSigs #-}
 import Data.Char ( toUpper )
 import Data.List ( intersperse )
-import Control.Monad (liftM, ap)
+import Control.Monad (liftM, ap, Monad (return))
+import Prelude hiding (return)
 
 fmaptest :: IO ()
 fmaptest = do
@@ -37,15 +38,13 @@ instance Functor RandomGenerator where
   fmap = liftM
 
 instance Applicative RandomGenerator where
-  pure  = return
-  (<*>) :: RandomGenerator (a -> b) -> RandomGenerator a -> RandomGenerator b
-  (<*>) = ap -- la funzione ap è definita in Control.Monad e fa esattamente questo
-             -- ap mf mx = do { f <- mf; x <- mx; return (f x) }
+    pure x = Ran (\s -> (x, s))
+    (Ran gf) <*> (Ran ga) = Ran (\s ->
+        let (f, s1) = gf s
+            (a, s2) = ga s1
+        in (f a, s2))  
 
-instreturn :: a -> RandomGenerator a
-    ance Monad RandomGenerator where
-    return x = Ran (\seed -> (x, seed))
-    (>>=) :: RandomGenerator a -> (a -> RandomGenerator b) -> RandomGenerator b
+instance Monad RandomGenerator where
     (Ran g0) >>= f = Ran (\seed ->
         let (y, seed1) = g0 seed
             (Ran g1) = f y
