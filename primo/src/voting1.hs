@@ -32,6 +32,9 @@ removedup :: Eq a => [a] -> [a]
 removedup []        = []
 removedup (x:xs)    = x : filter (/=x) (removedup xs)
 
+removedupwithfoldr :: Eq a => [a] -> [a]
+removedupwithfoldr = foldr (\x acc -> if x `elem` acc then acc else x:acc) []
+
 computepoll :: [Vote] -> [VotiPresi]
 computepoll vs  = [Esito v (count v vs) | v <- removedup vs]
 
