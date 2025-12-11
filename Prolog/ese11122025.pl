@@ -34,7 +34,7 @@ massimale(X, A) :-
         EtaB > EtaA
     ).
 
-p2(X) :-
+p2(X) :- persona(X,_),
     \+ (
         massimale(X, A),
         \+ maschio(A)
