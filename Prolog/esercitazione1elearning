@@ -1,0 +1,27 @@
+persona(a, 18).
+persona(b,25).
+persona(c, 32).
+persona(d,18).
+amico(a,b).
+amico(b,a).
+amico(c,a).
+amico(a,c).
+amico(c,d).
+amico(d,c).
+
+zipunequals([],[],[]).
+zipunequals([X|L], [Y|M], [f(X,Y)|N]) :- X\=Y, !, zipunequals(L, M, N).
+zipunequals([_|L], [_|M], N) :- zipunequals(L, M, N).
+
+soloamicigrandi(X):- persona(X, E), \+amicipiupiccoli(X,E).
+amicipiupiccoli(X,E):- amico(X,Y), persona(Y,E1), E>=E1.
+
+amicistessaeta(X):- persona(X, _), \+amicidiversaeta(X).
+amicidiversaeta(X):- amico(X,Y), amico(X,Z), persona(Y,E1), persona(Z,E2), E1\=E2.
+
+sum([], 0).
+sum([E|C], S):- sum(C, S1), S is S1+E.
+
+sommaetaamici(X,S):- bagof(E, Y^(amico(X,Y), persona(Y,E)), L), sum(L,S).
+
+stessaetadegliamici(X,Y) :- sommaetaamici(X,S), sommaetaamici(Y,S1), X\=Y, S=S1.
