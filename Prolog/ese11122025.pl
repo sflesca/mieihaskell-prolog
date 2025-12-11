@@ -39,3 +39,9 @@ p2(X) :-
         massimale(X, A),
         \+ maschio(A)
     ).
+
+stessaetadegliamici(X) :-
+    persona(X, EtaX),
+    findall(EtaA, (amico(X, A), persona(A, EtaA)), ListeEta),
+    sum_list(ListeEta, Somma),
+    EtaX =:= Somma.
