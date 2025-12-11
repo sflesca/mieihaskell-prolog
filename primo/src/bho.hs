@@ -13,7 +13,7 @@ sommalivello Vuoto _ = 0
 sommalivello (Nodo v sx dx) n 
         | n==0 = v
         | n<0 = 0
-        | otherwise = sommalivello sx (n-1) + sommalivello dx (n-1)7
+        | otherwise = sommalivello sx (n-1) + sommalivello dx (n-1)
 
 pathtutto :: Int -> AlberoBInt -> Bool
 pathtutto _ Vuoto = False

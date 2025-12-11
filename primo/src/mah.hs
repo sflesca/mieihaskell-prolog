@@ -1,3 +1,6 @@
+
+import Data.Map (Map, lookup, fromList)
+
 removeElementsByValues :: [Int] -> [Int] -> [Int]
 removeElementsByValues values filters = [ v | (v,f) <- zip values filters, v/=f]
 
@@ -26,8 +29,19 @@ albero3 :: AlberoBInt
 albero3 = Nodo 4 (Nodo 5 Vuoto Vuoto) (Nodo 6 (Nodo 5 Vuoto Vuoto) Vuoto)
 
 
+convertiLista :: [(Int, Int)] -> [[Int]]
+convertiLista = map (\(x, k) -> [x * n | n <- [1 .. k]])
 
+type Node = Int
+type Graph = Map Node [Node]
 
-convertiLista ::  [(Int,Int)] -> [[Int]]
-convertiLista [] = []
-convertiLista xs = foldr (++) [] [ x |  (y,z) < - xs , k <- [1..z] , x <- y*k ]
+cricca :: [Node] -> Graph -> Bool
+cricca ns g = all (\u -> isCliqueNode u ns g) ns
+
+-- verifica che u sia connesso a tutti gli altri nodi della lista
+isCliqueNode :: Node -> [Node] -> Graph -> Bool
+isCliqueNode u ns g =
+  case Data.Map.lookup u g of
+    Nothing      -> False                   -- nodo assente dal grafo
+    Just adjList ->
+      all (\v -> v == u || v `elem` adjList) ns
