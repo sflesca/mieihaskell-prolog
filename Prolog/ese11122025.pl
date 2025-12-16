@@ -11,7 +11,7 @@ segmentList([H|T], [Segmento | AltriSegmenti]) :-
 build_segment([], Acc, Segmento, []):- reverse(Acc, Segmento).  % fine lista: restituisci l'accumulato ma in ordine inverso
 
 build_segment([X|Xs], [Prev|RestAcc], Segmento, RestoFinale) :-
-    X > Prev,                          % crescita stretta
+    X > Prev, !,                        % crescita stretta
     build_segment(Xs, [X,Prev|RestAcc], Segmento, RestoFinale).
 
 build_segment([X|Xs], Acc, Segmento, [X|Xs]) :-
@@ -37,7 +37,7 @@ massimale(X, A) :-
 p2(X) :- persona(X,_),
     \+ (
         massimale(X, A),
-        \+ maschio(A)
+        femmina(A)
     ).
 
 stessaetadegliamici(X) :-
